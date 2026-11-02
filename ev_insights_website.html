@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Insights | Electric Vehicle Market Performance & Insights</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#f59e0b',
+                            goldHover: '#d97706',
+                            darkBg: '#090d16',
+                            cardBg: '#111827',
+                            navBg: 'rgba(15, 23, 42, 0.85)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 50px -12px rgba(245, 158, 11, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-brand-darkBg text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-brand-navBg border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="scrollToSection('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight text-white">
+                    EV <span class="text-amber-500">Insights</span>
+                </span>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <button onclick="scrollToSection('home')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">Home</button>
+                <button onclick="scrollToSection('about')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">About</button>
+                <button onclick="scrollToSection('features')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">Features</button>
+                <button onclick="scrollToSection('services')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">Services</button>
+                <button onclick="scrollToSection('dashboard')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">Dashboard</button>
+                <button onclick="scrollToSection('story')" class="nav-link text-slate-300 hover:text-amber-400 text-sm font-medium transition-colors">Story</button>
+            </nav>
+
+            <!-- Action Buttons Header -->
+            <div class="hidden sm:flex items-center space-x-4">
+                <button onclick="scrollToSection('dashboard')" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm rounded-lg shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all transform hover:-translate-y-0.5">
+                    Explore Dashboard
+                </button>
+                <button onclick="scrollToSection('story')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 hover:border-amber-500 text-sm font-semibold rounded-lg transition-all">
+                    Explore Story
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="text-slate-400 hover:text-white focus:outline-none text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-3 pb-6 space-y-3">
+            <button onclick="scrollToSection('home')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">Home</button>
+            <button onclick="scrollToSection('about')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">About</button>
+            <button onclick="scrollToSection('features')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">Features</button>
+            <button onclick="scrollToSection('services')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">Services</button>
+            <button onclick="scrollToSection('dashboard')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">Dashboard</button>
+            <button onclick="scrollToSection('story')" class="block w-full text-left py-2 text-slate-300 hover:text-amber-400 font-medium">Story</button>
+            <div class="pt-4 flex flex-col gap-2">
+                <button onclick="scrollToSection('dashboard')" class="w-full text-center py-2.5 bg-amber-500 text-slate-950 font-bold rounded-lg">Explore Dashboard</button>
+                <button onclick="scrollToSection('story')" class="w-full text-center py-2.5 bg-slate-800 text-amber-400 border border-amber-500/30 rounded-lg">Explore Story</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section id="home" class="relative pt-24 pb-20 overflow-hidden flex flex-col justify-center items-center text-center px-4">
+            <!-- Background Radial Glow -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto relative z-10">
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    Transform Your Workflow With <br>
+                    <span class="gold-gradient-text">Seamless Analytics</span>
+                </h1>
+                
+                <p class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Explore live EV market intelligence, adoption trends, and the story behind the growth of electric mobility through a polished dashboard and immersive experience.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                    <button onclick="scrollToSection('dashboard')" class="w-full sm:w-auto px-8 py-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-base rounded-xl shadow-xl shadow-amber-500/25 hover:shadow-amber-500/40 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                        <span>Explore the Dashboard</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    
+                    <button onclick="scrollToSection('story')" class="w-full sm:w-auto px-8 py-4 bg-slate-800/80 hover:bg-slate-800 text-amber-400 border border-amber-500/40 font-semibold text-base rounded-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Explore Story</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features / Key Highlight Pill Section -->
+        <section id="features" class="py-12 bg-slate-900/40 border-y border-slate-800/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="text-3xl font-extrabold text-amber-400 mb-1">89%</div>
+                        <div class="text-sm text-slate-400 font-medium">Market Growth Index</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="text-3xl font-extrabold text-amber-400 mb-1">324.5k</div>
+                        <div class="text-sm text-slate-400 font-medium">Avg Driving Range</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="text-3xl font-extrabold text-amber-400 mb-1">78.2 kWh</div>
+                        <div class="text-sm text-slate-400 font-medium">Avg Battery Capacity</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <div class="text-3xl font-extrabold text-amber-400 mb-1">4.5 / 5</div>
+                        <div class="text-sm text-slate-400 font-medium">Customer Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Services Summary -->
+        <section id="about" class="py-16 px-4">
+            <div class="max-w-5xl mx-auto text-center space-y-4">
+                <h2 class="text-xs uppercase tracking-widest text-amber-500 font-bold">About the Project</h2>
+                <h3 class="text-3xl sm:text-4xl font-bold text-white">Comprehensive Electric Mobility Data</h3>
+                <p class="text-slate-400 leading-relaxed max-w-3xl mx-auto">
+                    This interactive analytics portal compiles key metrics across manufacturers, category performances, battery technologies, and global distribution. Designed to help analysts and enthusiasts understand market acceleration in real time.
+                </p>
+            </div>
+        </section>
+
+        <!-- Tableau Dashboard Section -->
+        <section id="dashboard" class="py-16 bg-slate-950 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                    <div>
+                        <span class="text-amber-500 font-semibold text-sm tracking-wider uppercase">Live Analytics Viz</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">EV Market Dashboard & Stats</h2>
+                    </div>
+                    <p class="text-slate-400 text-sm mt-2 md:mt-0 max-w-md">
+                        Interactive Tableau visualisations showing key market dynamics, performance metrics, and global distribution.
+                    </p>
+                </div>
+
+                <!-- Tableau Embedded Iframe Container -->
+                <div class="w-full bg-slate-900 rounded-2xl p-2 sm:p-4 border border-slate-800 shadow-2xl glow-effect overflow-hidden">
+                    <div class="relative w-full overflow-hidden rounded-xl bg-slate-950" style="padding-top: 56.25%; min-height: 650px;">
+                        <iframe 
+                            src="https://public.tableau.com/views/AviralSharmaprojectTableau/Dashboard1?:showVizHome=no&:embed=true" 
+                            title="EV Market Performance Dashboard"
+                            class="absolute top-0 left-0 w-full h-full border-0 rounded-xl"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section Placeholder for navigation completeness -->
+        <section id="services" class="py-12 bg-slate-900/30">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <span class="text-amber-500 font-semibold text-xs uppercase tracking-wider">Solutions</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1 mb-4">Core Intelligence Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-8">
+                    <div class="p-6 bg-slate-900/80 border border-slate-800 rounded-xl">
+                        <i class="fa-solid fa-chart-line text-amber-500 text-2xl mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-2">Market Dynamics</h3>
+                        <p class="text-slate-400 text-sm">Tracking annual sales trends, vehicle categories, and manufacturer shares across regions.</p>
+                    </div>
+                    <div class="p-6 bg-slate-900/80 border border-slate-800 rounded-xl">
+                        <i class="fa-solid fa-car-battery text-amber-500 text-2xl mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-2">Battery Tech Trends</h3>
+                        <p class="text-slate-400 text-sm">Analyzing capacity improvements, battery chemistry market shares, and driving ranges.</p>
+                    </div>
+                    <div class="p-6 bg-slate-900/80 border border-slate-800 rounded-xl">
+                        <i class="fa-solid fa-earth-americas text-amber-500 text-2xl mb-4"></i>
+                        <h3 class="text-lg font-bold text-white mb-2">Global Adoption</h3>
+                        <p class="text-slate-400 text-sm">Visualizing geographic distribution and adoption milestones of electric mobility.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EV Story / Market Insights Section -->
+        <section id="story" class="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800 bg-slate-950">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Image Column -->
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+                            <img 
+                                src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" 
+                                alt="Modern Electric Vehicle" 
+                                class="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+                                onerror="this.src='https://placehold.co/800x600/1e293b/f59e0b?text=EV+Market+Insights'"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <span class="px-3 py-1 bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-semibold rounded-full">Electric Mobility</span>
+                                <p class="text-white font-bold text-lg mt-2">Leading the zero-emission revolution</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Text & Grid Column -->
+                    <div class="lg:col-span-7 space-y-8">
+                        <div>
+                            <span class="text-amber-500 font-semibold text-sm tracking-wider uppercase">Strategic Outlook</span>
+                            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 mb-4">Insights Behind the EV Story</h2>
+                            <p class="text-lg text-slate-300 font-medium mb-3">
+                                Tracking adoption, momentum, and market transformation
+                            </p>
+                            <p class="text-slate-400 text-base leading-relaxed">
+                                The EV market is moving fast, and the data reveals a clear story: demand is rising, technology is improving, and consumer confidence is accelerating. This dashboard highlights the key trends shaping the future of electric mobility and helps turn raw numbers into practical insight.
+                            </p>
+                        </div>
+
+                        <!-- 4 Feature Grid Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Card 1 -->
+                            <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl hover:border-amber-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-3">
+                                    <i class="fa-solid fa-chart-line text-lg"></i>
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Market Growth</h4>
+                                <p class="text-sm text-slate-400">EV adoption continues to rise as awareness, infrastructure, and affordability improve across markets.</p>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl hover:border-amber-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-3">
+                                    <i class="fa-solid fa-bolt text-lg"></i>
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Technology Shift</h4>
+                                <p class="text-sm text-slate-400">Battery innovation and smarter mobility solutions are making EVs more competitive and scalable.</p>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl hover:border-amber-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-3">
+                                    <i class="fa-solid fa-users text-lg"></i>
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Consumer Confidence</h4>
+                                <p class="text-sm text-slate-400">Growing trust in EV performance and expanding charging networks drive high user satisfaction.</p>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl hover:border-amber-500/40 transition-colors">
+                                <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-3">
+                                    <i class="fa-solid fa-lightbulb text-lg"></i>
+                                </div>
+                                <h4 class="text-base font-bold text-white mb-1">Actionable Insights</h4>
+                                <p class="text-sm text-slate-400">Each visual point in the dashboard is structured to guide strategic decision-making.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-10 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-7 h-7 rounded-lg bg-amber-500 flex items-center justify-center text-slate-950 font-bold text-sm">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="text-lg font-bold text-white">EV Insights</span>
+            </div>
+            
+            <p class="text-sm text-slate-500 text-center">
+                Electric Vehicle Market Performance & Analytics • Project Dashboard by Aviral Sharma
+            </p>
+
+            <div class="flex space-x-4 text-slate-400 text-lg">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="https://public.tableau.com" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition-colors"><i class="fa-solid fa-chart-pie"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        // Smooth scroll to sections
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        }
+
+        // Mobile Menu toggle logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
